@@ -1,9 +1,9 @@
 from moviepy.editor import AudioFileClip
 
-input_file = "audio/birds.mp3"
-output_file = "audio/birds_cut.mp3"
+input_file = "src/audio/crowd-cheer-full.mp3"
+output_file = "src/audio/crowd-cheer.mp3"
 start_time = 0  # Start time in seconds
-end_time = 15  # End time in seconds
+end_time = 5  # End time in seconds
 
 # Load the audio clip
 clip = AudioFileClip(input_file)

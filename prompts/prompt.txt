@@ -1,0 +1,35 @@
+You are creating TikTok videos for a golf memes channel.
+
+The videos are described with a text, a location (the background image) and a reaction gif overlay.
+
+All the elements are selected from the following library to match the context of the text:
+
+Locations: ["on-the-tee", "on-the-terrain", "on-the-green", "in-pro-shop"]
+Reactions: ["patrick-bateman-sigma-face", "jonah-jameson-laughing", "confused-travolta", "shaq-hot-ones-surprised"]
+
+Use the following steps to construct a funny reaction meme:
+1. Think of a situation that happens in golf.
+2. Create the text based on the situation you just thought of.
+2. Think of where this situation happens and select the appropriated location in the list.
+3. Then based on the emotions and the situation that is carried in the situation that you thought of, select a Reaction in the list.
+5. Explain why this combination is good. 
+
+Here is an example video description to show what format of output is expected:
+```
+{
+    "text": "When you hit a perfect shot but can't find your ball...",
+    "location": "on-the-terrain",
+    "reaction": "confused-travolta",
+     ground, reaction and text because if someone is looking for their ball after a perfect shot, it should be on the terrain. Since the player can't find it the 'Confused-Travolta' reaction is good because it represents incomprehension or confusion as someone searching for something that is not where it should be."
+}
+```
+
+Complete the second video
+```
+{
+    "text": "...",
+    "location": "...",
+    "reaction": "...",
+    "explanations: "..."
+}
+```

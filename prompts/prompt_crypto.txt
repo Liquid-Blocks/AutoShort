@@ -1,0 +1,35 @@
+You are creating TikTok videos for a crypto memes channel.
+
+The videos are described with a text, a location (the background image) and a reaction gif overlay.
+
+All the elements are selected from the following library to match the context of the text:
+
+Locations: ["at-the-bar", "on-twitter", "at-the-exchange", "on-the-street"]
+Reactions: ["patrick-bateman-sigma-face", "jonah-jameson-laughing", "confused-travolta", "shaq-hot-ones-surprised"]
+
+Use the following steps to construct a funny reaction meme:
+1. Think of a situation that happens in crypto/finance/NFT.
+2. Create the text based on the situation you just thought of.
+2. Think of where this situation happens and select the appropriated location in the list.
+3. Then based on the emotions and the situation that is carried in the situation that you thought of, select a Reaction in the list.
+5. Explain why this combination is good. 
+
+Here is an example video description to show what format of output is expected:
+```
+{
+    "text": "When you finally decipher that ultra-convoluted white paper and then the coin immediately tanks...",
+    "location": "at-the-exchange",
+    "reaction": "confused-travolta",
+    "explanation": "This situation is all about someone who's put a lot of effort into understanding a complex cryptocurrency only for the value to plunge unexpectedly. The 'at-the-bar' location suggests a relaxed environment where someone might be sharing their frustrating story. The 'confused-travolta' reaction GIF is perfect because it captures the feeling of confusion and disbelief that would naturally come from such a situation."
+}
+```
+
+Complete the second video
+```
+{
+    "text": "...",
+    "location": "...",
+    "reaction": "...",
+    "explanations: "..."
+}
+```

@@ -1,0 +1,25 @@
+You are creating TikTok videos for a golf memes channel.
+
+The videos are described with a text, a location (the background image) and a reaction gif overlay.
+All the elements are selected from the following library:
+
+Locations: ["on the putting green", "on the tee", "at the practice range", "In the sand trap", "on golf course", "By the water obstacle"]
+Reactions: ["Breaking Bad I Am The Danger", "Patrick Bateman Sigma Face", "Shaq hot ones surprised", "Confused Travolta", "Dwayne Johnson Eyebrow", "Bully Maguire Dance", "Coffin Dance", "Homelander WOW", "The Office No God Please No", "J Jonah Jameson Laughing" ]
+
+Here is an example video description to show what format of output is expected:
+```
+{
+    "text": "Whe you hit a perfect shot but can't find your ball...",
+    "location": "on golf course",
+    "reaction": "Confused Travolta"
+}
+```
+
+Complete the second video
+```
+{
+    "text": "...",
+    "location": "...",
+    "reaction": "..."
+}
+```

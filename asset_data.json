@@ -1,0 +1,23 @@
+{
+    "locations": {
+        "on-the-terrain": {
+            "images": ["on-the-terrain-1", "on-the-terrain-2"],
+            "sounds": ["birds"]
+        },
+        "on-the-tee": {
+            "images": ["on-the-tee-1"],
+            "sounds": ["birds"]
+        },
+        "in-pro-shop": {
+            "images": ["in-pro-shop-1"],
+            "sounds": ["birds"]
+        },
+        "on-the-green": {
+            "images": ["on-the-green-1"],
+            "sounds": ["birds"]
+        }
+    },
+    "reactions": {
+        "the-office-no-god-please-no": { "color": [20,189,0] }
+    }
+}

@@ -1,44 +1,68 @@
 from moviepy.editor import ImageClip, VideoFileClip, TextClip, CompositeVideoClip, vfx, AudioFileClip, CompositeAudioClip
 
-print("launching video creation process")
+import json
+import sys
+from tools.location_mixer import location_mixer
+from tools.utils import convert_text
 
-# Backgrounds and reactions paths
+# Backgrounds and reactions paths (const)
 backgrounds_path = "src/backgrounds/"
 reactions_path = "src/reactions/"
 audio_path = "src/audio/"
 
-# Load reaction video and remove green screen
-reaction = (VideoFileClip(reactions_path + "j-jonah-jameson-laughing.mp4", has_mask=True)
+def read_json_file(file_path):
+    # Open the file
+    with open(file_path, 'r') as f:
+        # Load JSON data from file
+        data = json.load(f)
+        return data
+        
+
+if __name__ == "__main__":
+    # Check if the file name has been passed as a command line argument
+    if len(sys.argv) > 1:
+        file_path = sys.argv[1]
+        data = read_json_file(file_path)
+    else:
+        print("Please provide a file path. Usage: python make.py <file_path>")
+
+print("AutoShort - Received input")
+print(data)
+
+print("AutoShort - Mixing context")
+location_image, location_audio = location_mixer(data["location"])
+
+print("AutoShort - Load reaction data")
+reaction_data = read_json_file(reactions_path+data["reaction"]+"/"+data["reaction"]+".json")
+
+print("AutoShort - Load reaction video and remove green screen")
+reaction = (VideoFileClip(reactions_path+data["reaction"]+"/"+data["reaction"]+".gif", has_mask=True)
             .set_position(("right", "bottom")) # position of the reaction
-            .set_duration(5)) # duration of reaction
-reaction = vfx.mask_color(reaction, color=[0,255,0], thr=15)
+            .set_duration(reaction_data["length"])) # duration of reaction
+reaction = vfx.mask_color(reaction, color=reaction_data["color"], thr=15)
 
-#Load the background
-background = ImageClip(backgrounds_path + "terrain.png", duration=reaction.duration)
+print("AutoShort - Load the background image")
+background = ImageClip(backgrounds_path + location_image + ".png", duration=reaction.duration)
 
-# Create text and position
-txt = TextClip("When your friend claims he can outdrive you and then tops it 10 yards.", method='caption', font ="Arial-Bold", fontsize=100, size=(900, 1920) , color='white', stroke_color='black', stroke_width=5)
-txt = txt.set_position(('center', -400)).set_duration(reaction.duration)
+print("AutoShort - Load the background audio")
+background_audio = (AudioFileClip(audio_path + location_audio + ".mp3").subclip(0, reaction.duration))
 
-# Composite the video
-visual = CompositeVideoClip([background, reaction, txt])
+if(reaction_data["has_audio"]):
+    print("AutoShort - Load reaction audio")
+    reaction_audio = (AudioFileClip(reactions_path+data["reaction"]+"/"+data["reaction"]+".mp3").subclip(0, reaction.duration))
 
-# Load audio file
-background_audio = (AudioFileClip(audio_path + "birds.mp3")
-         .subclip(0, reaction.duration))
-
-# Check if the reaction video has audio
-reaction_audio = reaction.audio
-if reaction_audio is not None:
-    # Combine the reaction audio with the background audio
+    print("AutoShort - Composite audio")
     audio = CompositeAudioClip([background_audio, reaction_audio])
 else:
-    # Use only the background audio
     audio = background_audio
 
-final = visual.set_audio(audio)
+print("AutoShort - Create text and position")
+txt = TextClip(data["text"], method='caption', font ="Arial-Bold", fontsize=100, size=(900, 1920) , color='white', stroke_color='black', stroke_width=5)
+txt = txt.set_position(('center', -400)).set_duration(reaction.duration)
 
-# Write to file
-final.write_videofile(f"results/output_video.mp4", codec="libx264", fps=24)
+print("AutoShort - Composite video")
+video = CompositeVideoClip([background, reaction, txt]).set_audio(audio)
 
-print("Video created successfully!")
+# Write to file with unique name
+
+video.write_videofile("results/"+ convert_text(data["text"]) + ".mp4", codec="libx264", fps=24)
